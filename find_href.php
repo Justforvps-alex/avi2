@@ -7,40 +7,10 @@ $main_url=$_GET['url'];
 $page_number=$_GET['p'];
 $number_of_phones=$_GET['n'];
 $phone_number=$_GET['phone'];
-if($page_number==1)
-{
-$phpstatus=htmlentities(file_get_contents("phpstatus.txt"));
-	if($phpstatus=="run")
-	{
-		$change_signal = fopen('signal.txt', 'w+');
-        fwrite($change_signal, "stop");
-        fclose($change_signal);
-	}
-	$time=0;
-	while($phpstatus!="done")
-	{
-	    $phpstatus=htmlentities(file_get_contents("phpstatus.txt"));
-	    sleep(5);
-	    $time++;
-	    if($time==36){break;}
-	}
-	$change_signal = fopen('signal.txt', 'w+');
-    fwrite($change_signal, "run");
-    fclose($change_signal);
-    $proxy=NULL;
-    $fp = fopen('data.txt', 'w');
-	fwrite($fp, $main_url.",");
-    fclose($fp);
-    $fp = fopen('peoxy.txt', 'w');
-    fclose($fp);
-    $mistakes = fopen('mistakes.txt', 'w');
-    fclose($mistakes);
-}
-//print
-//('<form action="check_status.php" class="justify-content-center "><input style="margin-top:20px; width:100%; font-size:20px;" type="submit" name="status" value="Отслеживать состояние загрузки">
-//</form>');
-//ob_flush();
-//flush();
+print('<form action="check_status.php" class="justify-content-center "><input style="margin-top:20px; width:100%; font-size:20px;" type="submit" name="status" value="Отслеживать состояние загрузки">
+</form>');
+ob_flush();
+flush();
 //Создание статусазапущено
 $php_status = fopen('phpstatus.txt', 'w+');
 fwrite($php_status, "run");
