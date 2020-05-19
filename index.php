@@ -3,6 +3,32 @@
 	{
 		$url = $_POST['link'];
 		$n= $_POST['phone_numbers'];
+		$phpstatus=htmlentities(file_get_contents("phpstatus.txt"));
+	if($phpstatus=="run")
+	{
+		$change_signal = fopen('signal.txt', 'w+');
+        fwrite($change_signal, "stop");
+        fclose($change_signal);
+	}
+	$time=0;
+	while($phpstatus!="done")
+	{
+	    $phpstatus=htmlentities(file_get_contents("phpstatus.txt"));
+	    sleep(5);
+	    $time++;
+	    if($time==36){break;}
+	}
+		$change_signal = fopen('signal.txt', 'w+');
+		    fwrite($change_signal, "run");
+		    fclose($change_signal);
+		    $proxy=NULL;
+		    $fp = fopen('data.txt', 'w');
+		fwrite($fp, $main_url.",");
+		    fclose($fp);
+ 		   $fp = fopen('peoxy.txt', 'w');
+ 		   fclose($fp);
+  		  $mistakes = fopen('mistakes.txt', 'w');
+    		fclose($mistakes);
 		header("Location:find_href.php?url=$url&n=$n&phone=0&p=1");
 	}
 ?>
